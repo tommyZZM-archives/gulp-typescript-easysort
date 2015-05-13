@@ -1,0 +1,15 @@
+{
+  "name": "gulp-typescript-easysort",
+  "version": "0.0.1",
+  "description": "\"Squerence TypeScript Files Accroding to Their Reference from each other\"",
+  "main": "sequence.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "event-stream": "latest",
+    "gulp-util": "latest"
+  }
+}
