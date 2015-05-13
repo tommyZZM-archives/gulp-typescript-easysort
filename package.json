@@ -6,8 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "tommyZZM",
   "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/tommyZZM/gulp-typescript-easysort/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommyZZM/gulp-typescript-easysort/tsc-cormorant"
+  },
   "dependencies": {
     "event-stream": "latest",
     "gulp-util": "latest"
