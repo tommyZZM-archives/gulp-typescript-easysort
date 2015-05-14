@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords":["typescript","tsc","gulp","plugin"],
   "author": "tommyZZM",
   "license": "BSD",
   "bugs": {
