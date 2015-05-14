@@ -10,5 +10,3 @@ gulp.task('src-sort', function() {
         .pipe(filelist('alcedo-src-filelist.json'))
         .pipe(gulp.dest("./tmp/"));
 });
-
-
