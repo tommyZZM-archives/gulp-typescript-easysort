@@ -12,6 +12,8 @@ witch means you can sort a group of typescript files with out
 
 # Useage Example
 ```javascript
+var tssort = require('gulp-typescript-easysort');
+
 gulp.task('src-sort', function() {
     return gulp.src("./src/**/*.ts")
         .pipe(tssort())
