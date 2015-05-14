@@ -1,8 +1,8 @@
 # gulp-typescript-easysort
 Squerence TypeScript Files Accroding to Their Reference from each other,
-witch means you can sort a group of typescript files with out <code>"///<reference path="..."/>"</code>.
+witch means you can sort a group of typescript files with out ///<reference path="..."/>
 
-通过TypeScript文件间相互引用关系，对一系列.ts文件进行排序，不需要<code>"///<reference path="..."/>"</code>
+通过TypeScript文件间相互引用关系，对一系列.ts文件进行排序，而不需要 ///<reference path="..."/>
 
 # Useage Example
 ```javascript
