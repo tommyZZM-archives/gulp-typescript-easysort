@@ -1,6 +1,6 @@
 {
   "name": "gulp-typescript-easysort",
-  "version": "0.0.5a",
+  "version": "0.0.6",
   "description": "\"Squerence TypeScript Files Accroding to Their Reference from each other\"",
   "main": "sequence.js",
   "scripts": {
