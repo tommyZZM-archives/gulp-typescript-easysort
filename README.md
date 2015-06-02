@@ -8,10 +8,12 @@ witch means you can sort a group of typescript files with out reference path="..
 ```javascript
 var tssort = require('gulp-typescript-easysort');
 
+var filelist = require('gulp-filelist');
+
 gulp.task('src-sort', function() {
     return gulp.src("./src/**/*.ts")
         .pipe(tssort())
-        .pipe(filelist('alcedo-src-filelist.json'))
+        .pipe(filelist('filelist.json'))
         .pipe(gulp.dest("./tmp/"));
 });
 ```
