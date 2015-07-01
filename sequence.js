@@ -3,7 +3,7 @@
  * 根据typescript之间的引用关系排序，从egret框架的编译工具中挖掘出来的。
  */
 var eventStream = require('event-stream');
-var gutil = require('gulp-util');
+//var gutil = require('gulp-util');
 
 var efile = require("./file.js");
 var analysis = require("./analysis.js");
@@ -81,7 +81,7 @@ function SequenceTypeScriptFile(){
     var onFile = function (file) {
         var filePath = path.normalize(file.path);
         //gutil.log('pushing  ' + filePath + ' into the map');
-        filesToHandle.push(filePath);
+        filesToHandle.push({text:file.contents.toString(),path:filePath});
         filesToHandleDict[filePath] = file;
     };
 
@@ -98,7 +98,7 @@ function sequence(){
     var i,length = filesToHandle.length;
     for (i = 0; i < length; i++) {
         var file = filesToHandle[i];
-        readClassNamesFromTs(file);
+        readClassNamesFromTs(file.text,file.path);
     }
 
     var sortresult = sortFileList(filesToHandle);
@@ -115,20 +115,20 @@ function sequence(){
  * 按照引用关系排序指定的文件列表
  */
 function sortFileList(list){
-
+    var file,ext;
     var length = list.length;
     for (var i = 0; i < length; i++) {
-        var path = list[i];
-        var ext = efile.getExtension(path).toLowerCase();
+        file = list[i];
+        ext = efile.getExtension(file.path).toLowerCase();
         if(ext=="ts"){
-            readRelyOnFromTs(path);
+            readRelyOnFromTs(file.text,file.path);
         }
     }
     for (i = 0; i < length; i++) {
-        path = list[i];
-        var ext = efile.getExtension(path).toLowerCase();
+        file = list[i];
+        ext = efile.getExtension(file.path).toLowerCase();
         if(ext=="ts"){
-            readReferenceFromTs(path);
+            readReferenceFromTs(file.text,file.path);
         }
     }
 
@@ -280,8 +280,8 @@ function setPathLevel(path, level, pathLevelInfo, map,pathRelyInfo,throwError,ch
 /**
  * 读取一个TS文件引用的类名列表
  */
-function readReferenceFromTs(path){
-    var text = efile.read(path);
+function readReferenceFromTs(text,path){
+    //var text = efile.read(path);
     var orgText = analysis.removeCommentExceptQuote(text);
     text = analysis.removeComment(text,path);
     var block = "";
@@ -359,8 +359,8 @@ function checkAllClassName(classNameToPath,path,list,moduleList,orgText){
 /**
  * 读取一个ts文件引用的类列表
  */
-function readClassNamesFromTs(path) {
-    var text = efile.read(path);
+function readClassNamesFromTs(text,path) {
+    //var text = efile.read(path);
     text = analysis.removeComment(text,path);
     var list = [];
     var noneExportList = [];
@@ -567,9 +567,9 @@ function getFirstKeyWordIndex(key,text,ns){
 /**
  * 读取一个ts文件引用的类列表
  */
-function readRelyOnFromTs(path) {
+function readRelyOnFromTs(text,path) {
     var fileRelyOnList = [];
-    var text = efile.read(path);
+    //var text = efile.read(path);
     text = analysis.removeComment(text,path);
     readRelyOnFromImport(text, fileRelyOnList);
     analyzeModuleForRelyOn(text,path,fileRelyOnList,"");
