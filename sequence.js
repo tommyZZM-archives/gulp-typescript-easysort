@@ -98,6 +98,7 @@ function sequence(){
     var i,length = filesToHandle.length;
     for (i = 0; i < length; i++) {
         var file = filesToHandle[i];
+        //console.log(file.text);
         readClassNamesFromTs(file.text,file.path);
     }
 
@@ -120,6 +121,7 @@ function sortFileList(list){
     for (var i = 0; i < length; i++) {
         file = list[i];
         ext = efile.getExtension(file.path).toLowerCase();
+        //console.log(file.path)
         if(ext=="ts"){
             readRelyOnFromTs(file.text,file.path);
         }
@@ -133,7 +135,9 @@ function sortFileList(list){
     }
 
     var paths = [];
+    var path = file.path;
     //把所有引用关系都合并到pathInfoList里，并把类名替换为对应文件路径。
+
     for (var path in pathInfoList) {
         paths.push(path);
         var list = pathInfoList[path];
@@ -154,10 +158,10 @@ function sortFileList(list){
         }
         length = list.length;
         for (i = length - 1; i >= 0; i--) {
-            className = list[i];
+            className = list[i].path;
             var relyPath = classNameToPath[className];
             if (relyPath && relyPath != path) {
-                list[i] = relyPath;
+                list[i].path = relyPath;
             } else {
                 list.splice(i, 1);
             }
@@ -172,6 +176,8 @@ function sortFileList(list){
         list = sortOnReference(list);
         gameList = list.concat(gameList);
     }
+
+
 
     return gameList;
 }
@@ -362,6 +368,7 @@ function checkAllClassName(classNameToPath,path,list,moduleList,orgText){
 function readClassNamesFromTs(text,path) {
     //var text = efile.read(path);
     text = analysis.removeComment(text,path);
+    //console.log(text)
     var list = [];
     var noneExportList = [];
     analyzeModule(text,list,noneExportList,"");
@@ -574,6 +581,7 @@ function readRelyOnFromTs(text,path) {
     readRelyOnFromImport(text, fileRelyOnList);
     analyzeModuleForRelyOn(text,path,fileRelyOnList,"");
     pathInfoList[path] = fileRelyOnList;
+
 }
 
 /**
